@@ -53,6 +53,10 @@ module.exports = {
       dob: {
         type: Sequelize.STRING
       },
+      hasLoggedIn: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: 0
+      },
       otherName: {
         type: Sequelize.STRING
       },
