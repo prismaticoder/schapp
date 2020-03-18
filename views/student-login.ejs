@@ -1,0 +1,30 @@
+<%- include ('./partials/header.ejs') %> 
+
+
+<div class="container mt-5">
+
+
+
+<h4 class="text-center mt-5"><span class="redColor">schApp</span> Student Login</h4>
+<hr>
+
+<div class="mx-auto col-md-8 p-3 mt-5">
+    <div class="text-center blueColor"><i class="text-danger fa fa-1x">*</i> - Required Field</div>
+
+    <form method="POST">
+        <div class="form-group blueColor mt-3 text-center" >
+            <label for="surname">Matric. Number <i class="text-danger fa fa-1x">*</i></label>
+            <input required class="form-control mx-auto col-md-6 col-sm-10" id="surname" name="matric" type="text" placeholder="Matric Number">
+        </div>
+        <div class="form-group text-center blueColor mt-2">
+            <label for="matric">Password <i class="text-danger fa fa-1x">*</i></label>
+            <input required class="form-control mx-auto col-md-6 col-sm-10" id="matric" name="password" type="password" placeholder="Password"><br>
+            <button class="btn btn-block mt-2 myBtn col-md-6 col-sm-10 text-white btn-primary" type="submit" style="margin: auto;">Submit</button>
+        </div>
+    </form>
+    
+</div>
+
+</div>
+
+<%- include ('./partials/footer.ejs') %> 
