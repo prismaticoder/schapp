@@ -1,0 +1,57 @@
+<%- include ('./partials/student-header.ejs') %> 
+
+<h3 class="text-center mt-5">STUDENT PROFILE</h3>
+<hr>
+
+<div class="container">
+    <div class="row border-bottom p-3">
+        <div class="col-md-4">
+            Name: <%= student.fullName %> 
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            Matric. Number: <%= student.matric %> 
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            Level: <%= student.level %> 
+        </div>
+    </div>
+    <div class="row border-bottom p-3">
+        <div class="col-md-3">
+            Email: <%= student.email %> 
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            CGPA: <%= student.cgpa %> 
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            Session of Admission: <%= student.admissionYear %> 
+        </div>
+    </div>
+    <div class="row border-bottom p-3">
+        <div class="col-md-5">
+            Faculty: <%= student.faculty %> 
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+            Department: <%= student.department %> 
+        </div>
+    </div>
+    <div class="row border-bottom p-3">
+        <div class="col-md-3">
+            Nationality: <%= student.nationality %> 
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            State: <%= student.state %> 
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            LGA: <%= student.lga %> 
+        </div>
+    </div>
+</div>
+
+<%- include ('./partials/footer.ejs') %> 

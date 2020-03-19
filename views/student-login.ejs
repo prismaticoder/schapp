@@ -14,11 +14,11 @@
     <form method="POST">
         <div class="form-group blueColor mt-3 text-center" >
             <label for="surname">Matric. Number <i class="text-danger fa fa-1x">*</i></label>
-            <input required class="form-control mx-auto col-md-6 col-sm-10" id="surname" name="matric" type="text" placeholder="Matric Number">
+            <input required class="form-control mx-auto col-md-6 col-sm-10" id="surname" value="<%= (matric)?matric:"" %>" name="matric" type="text" placeholder="Matric Number">
         </div>
         <div class="form-group text-center blueColor mt-2">
-            <label for="matric">Password <i class="text-danger fa fa-1x">*</i></label>
-            <input required class="form-control mx-auto col-md-6 col-sm-10" id="matric" name="password" type="password" placeholder="Password"><br>
+            <label for="matric">Student Mail <i class="text-danger fa fa-1x">*</i></label>
+            <input required class="form-control mx-auto col-md-6 col-sm-10" id="matric" name="email" type="email" placeholder="Password"><br>
             <button class="btn btn-block mt-2 myBtn col-md-6 col-sm-10 text-white btn-primary" type="submit" style="margin: auto;">Submit</button>
         </div>
     </form>

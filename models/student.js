@@ -16,7 +16,14 @@ module.exports = (sequelize, DataTypes) => {
     nationality: DataTypes.STRING,
     admissionYear: DataTypes.STRING,
     dob: DataTypes.STRING,
-    otherName: DataTypes.STRING
+    hasLoggedIn: DataTypes.BOOLEAN,
+    otherName: DataTypes.STRING,
+    fullName: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        return `${this.firstName} ${this.lastName}`
+      }
+    }
   }, {});
   Student.associate = function(models) {
     // associations can be defined here

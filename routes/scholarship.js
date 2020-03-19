@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var { checkStudent } = require('../middlewares')
 var { Op } = require('sequelize');
 var models = require('../models'); // loads index.js
-var { Scholarship } = models;       // the model keyed by its name
+var { Scholarship,Application } = models;       // the model keyed by its name
 
 router.get('/', async (req,res) => {
 
@@ -37,6 +38,23 @@ router.get('/:id', async (req,res) => {
         else {
             return res.status(404).json("Invalid ID")
         }
+    } catch (error) {
+        console.log(error)
+    }
+
+})
+
+router.post('/:id/apply', checkStudent, async (req, res) => {
+    let { student } = res.locals;
+    let { id } = req.params;
+
+    try {
+        let application = await student.createApplication({
+            scholarshipId: id,
+            status: "ongoing"
+        })
+
+        return res.json("You have successfully applied for this scholarship")
     } catch (error) {
         console.log(error)
     }
