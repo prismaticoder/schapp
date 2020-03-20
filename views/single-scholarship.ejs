@@ -1,0 +1,75 @@
+<% if (student) { %>
+    <%- include ('./partials/student-header.ejs') %>
+<% } else { %>
+    <%- include ('./partials/header.ejs') %>
+<% } %>  
+
+
+<div class="container">
+
+<h1 class="title-header mt-5 mb-2 p-1 pl-2"><%= scholarship.name %> </h1>
+<hr>
+        <div class="single-job-top mt-5">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 job-head">
+                    <div class="job-img-container">
+                        <img class="img-fluid" src="/images/<%= scholarship.imageLogo %> " alt="<%= scholarship.name %> " />
+                    </div>
+                    <div class="job-quick-details mt-4 text-center">
+                        <p><%= scholarship.name %> </p>
+                        <p>By <%= "Chevron" %> </p>
+                        <a class="btn btn-primary mt-3 mb-4 applyBtn" id="<%= scholarship.id %>" href="/scholarships/<%= scholarship.id %>/apply">Apply Now</a>
+                    </div>
+                </div>
+                <div class="d-md-none col-lg-1"></div>
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 job-summary">
+                    <h3 class="text-center text-black">NEW SCHOLARSHIP APPLICATION</h3>
+                    <p>
+                        Apply for the <strong><%= scholarship.name %></strong> scholarship with schAppp!
+                        <ul class="list-group-flush">
+                            REQUIREMENTS
+                            <li class="list-group-item"><i class="fa fa-angle-double-right"></i> Minimum CGPA: <%= JSON.parse(scholarship.restrictions).cgpa %></li>
+                            <li class="list-group-item"><i class="fa fa-angle-double-right"></i> Minimum Level: <%= JSON.parse(scholarship.restrictions).level %></li>
+                            <li class="list-group-item"><i class="fa fa-angle-double-right"></i> State: <%= JSON.parse(scholarship.restrictions).state %></li>
+                            <li class="list-group-item"><i class="fa fa-angle-double-right"></i> LGA: <%= JSON.parse(scholarship.restrictions).lga %></li>
+                        </ul> 
+                        <p> </p>
+                        <p> </p>
+                        <p></p>
+                        <p></p>
+                        <p style="font-size: 14px;">Deadline: <span><%= scholarship.deadline %> </span></p>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="single-job-body text-sm">
+            <h3 class="text-center text-black">FULL DESCRIPTION</h3>
+            <%= scholarship.details %> 
+        </div>
+        <br />
+    </div>
+
+
+    <% if (student) { %>
+        <script>
+            $('.applyBtn').click(function(event) {
+                event.preventDefault();
+                let id = $(this).attr('id')
+                $.ajax({
+                    url: `/scholarships/${id}/apply`,
+                    method: 'GET',
+                    success: function(response) {
+                        alert(response.message)
+                    },
+                    error: function(err) {
+                        console.log(err)
+                    }
+                })
+            })
+        </script>    
+    <% } %>
+
+
+
+<%- include ('./partials/footer.ejs') %> 

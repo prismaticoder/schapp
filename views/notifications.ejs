@@ -6,45 +6,35 @@
 
 <div class="col-lg-9 mx-auto mt-lg-0 mt-3" id="jobTable">
 
-    <% for( let index = 0; index < 12; index++ ) { %>
-        <div class="mb-4 border rounded">
-            <div class="row">
-                <div class="col-md-2">
-                    <img class="img-fluid" src="/images/chevron-logo.jpg" alt="Chevron logo">
-                </div>
-                <div class="col-md-7">
-                    <a class="text-dark" href="jobs/">
-                        <h4 class="b-6 mt-3 mt-lg-0 ci-title">Chevron Scholarships for International Students</h4>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="/jobs/{{ this.custom_url }}" class="btn mt-2 br-0 btn-primary unsub_cancel btn-sm rounded">View
-                        details</a>
-                </div>
-            </div>
-        </div>
-      <% } %>
-
 
 <!-- </div> -->
-      <% notifications.forEach(notification => { %>
+<% if (notifications.length > 0) { %>
+    <% notifications.forEach(notification => { %>
         <div class="mb-4 border rounded">
             <div class="row">
                 <div class="col-md-2">
                     <img class="img-fluid" src="/images/<%= notification.imageLogo %> " alt="Chevron logo">
                 </div>
                 <div class="col-md-7">
-                    <a class="text-dark" href="jobs/">
+                    <a class="text-dark" href="/scholarships/<%= notification.id %>">
                         <h4 class="b-6 mt-3 mt-lg-0 ci-title"><%= notification.name %> </h4>
                     </a>
                 </div>
                 <div class="col-md-3">
-                    <a href="/scholarships/<%= notification.id %> " class="btn mt-2 br-0 btn-primary unsub_cancel btn-sm rounded">View
+                    <a href="/scholarships/<%= notification.id %>" class="btn mt-2 br-0 btn-primary unsub_cancel btn-sm rounded">View
                         details</a>
                 </div>
             </div>
         </div>
       <% }) %>
+<% } else { %>
+    <div class="mx-auto">
+        <p class="text-center">
+            There are no notifications available currently for you.
+        </p>
+    </div>
+<% } %>
+      
   </div>
 
 

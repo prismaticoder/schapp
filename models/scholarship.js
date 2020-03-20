@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     orgId: DataTypes.INTEGER,
     deadline: DataTypes.DATE,
     restrictions: DataTypes.STRING,
+    imageLogo: DataTypes.STRING,
     details: DataTypes.TEXT
   }, {});
   Scholarship.associate = function(models) {

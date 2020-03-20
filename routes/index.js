@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
           matric
         }
       }) 
+      res.locals.student = req.session.student
       return res.render('student-index', {title: "Dashboard", page_name: "home", student})
     } catch (error) {
       console.log(error)
@@ -23,7 +24,7 @@ router.get('/', async (req, res) => {
   }
   
   else {
-    return res.render('index', {title: "Welcome to Schapp", page_name: "home", student: null})
+    return res.render('index', {title: "Welcome to schAppp", page_name: "home", student: null})
   }
   
 });
@@ -65,12 +66,12 @@ router.get('/notifications', checkStudent, async (req, res) => {
 
   let scholarships = await Scholarship.findAll();
 
-  // scholarships = scholarships.filter(element => {
-  //   restrictions = JSON.parse(element.restrictions);
-  //   if (student.cgpa >= restrictions.cgpa && student.level >= restrictions.level && (student.state == restrictions.state || restrictions.state == null) && (student.lga == restrictions.lga || restrictions.lga == null)) {
-  //     return element
-  //   }
-  // })
+  scholarships = scholarships.filter(element => {
+    restrictions = JSON.parse(element.restrictions);
+    if ((student.cgpa >= restrictions.cgpa || restrictions.cgpa == "Any") && (student.level >= restrictions.level || restrictions.level == "Any") && (student.state == restrictions.state || restrictions.state == "Any") && (student.lga == restrictions.lga || restrictions.lga == "Any")) {
+      return element
+    }
+  })
 
   scholarships.sort((a,b) => {
     if (a.createdAt < b.createdAt) {

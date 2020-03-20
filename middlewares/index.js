@@ -4,22 +4,32 @@ var { Student } = models;       // the model keyed by its name
 
 exports.checkStudent = async (req, res, next) => {
     if (req.session.student) {
-        let matric = req.session.student 
+        let student = await Student.findOne({
+            where: {
+                matric: req.session.student
+            }
+        })
 
-        try {
-            let student = await Student.findOne({
-              where: {
-                matric
-              }
-            }) 
-            res.locals.student = student;
-            return next()
-          } catch (error) {
-            console.log(error)
-          }
+        res.locals.student = student
+        return next()
     }
     else {
         res.redirect('/login')
+    }
+}
+
+exports.getStudent = async (req, res) => {
+    
+    try {
+        let student = await Student.findOne({
+            where: {
+                matric: req.session.student
+            }
+        })
+    
+        return student   
+    } catch (error) {
+        console.log(error)
     }
 }
 

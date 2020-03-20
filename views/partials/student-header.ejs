@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>schApp | <%= title %></title>
+    <title>schAppp | <%= title %></title>
     <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link href="/stylesheets/simple-line-icons.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -21,7 +22,7 @@
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
-        <a class="navbar-brand" href="/">schApp</a>
+        <a class="navbar-brand" href="/"><i class="icon-check"></i> &nbsp;schAppp</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,7 +36,7 @@
                 <a class="nav-link" href="/profile">My Profile</a>
               </li>
               <li class="nav-item <%= (page_name == 'scholarships')?"active":"" %>">
-                <a class="nav-link" href="/scholarships">Scholarships</a>
+                <a class="nav-link" href="/scholarships">All Scholarships</a>
               </li>
               <li class="nav-item <%= (page_name == 'notifications')?"active":"" %>">
                   <a class="nav-link" href="/notifications"> Notifications <span class="badge badge-danger">4</span></a>
