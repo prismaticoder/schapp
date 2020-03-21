@@ -82,15 +82,31 @@ router.get('/:id/apply', checkStudent, async (req, res) => {
 
             //Check for all necessary conditions
             if ((student.cgpa >= cgpa || cgpa == "Any") && (student.level >= level || level == "Any") && (student.state == state || state == "Any") && (student.lga == lga || lga == "Any")) {
-                await student.createApplication({
-                    ScholarshipId: id,
-                    status: "ongoing"
+                
+                let check = await Application.findOne({
+                    where: {
+                        StudentId: student.id,
+                        ScholarshipId: id
+                    }
                 })
 
-                return res.json({message: "You have successfully applied for this scholarship"})
+                if (check) {
+                    return res.json({message: "You have already applied for this scholarship!"})
+                }
+                else if (new Date() > scholarship.deadline) {
+                    return res.json({message: "Sorry, you can no longer apply for this scholarship as the deadline has passed"})
+                }
+                else {
+                    await student.createApplication({
+                        ScholarshipId: id,
+                        status: "ongoing"
+                    })
+    
+                    return res.json({message: "You have successfully applied for this scholarship!"})
+                }
             }
             else {
-                return res.json({message: "Sorry, you are ineligible to apply for this scholarship based on the given requirements"})
+                return res.json({message: "Sorry, you are ineligible to apply for this scholarship based on the given requirements."})
             }
         }
     } catch (error) {
