@@ -94,7 +94,7 @@ router.get('/:id/apply', checkStudent, async (req, res) => {
                     return res.json({message: "You have already applied for this scholarship!"})
                 }
                 else if (new Date() > scholarship.deadline) {
-                    return res.json({message: "Sorry, you can no longer apply for this scholarship as the deadline has passed"})
+                    return res.json({message: `Sorry ${student.firstName}, you can no longer apply for this scholarship as the deadline has passed`})
                 }
                 else {
                     await student.createApplication({
@@ -106,7 +106,7 @@ router.get('/:id/apply', checkStudent, async (req, res) => {
                 }
             }
             else {
-                return res.json({message: "Sorry, you are ineligible to apply for this scholarship based on the given requirements."})
+                return res.json({message: `Sorry ${student.firstName}, you are ineligible to apply for this scholarship based on the given requirements.`})
             }
         }
     } catch (error) {
