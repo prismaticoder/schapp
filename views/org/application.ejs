@@ -1,0 +1,66 @@
+<%- include ('../partials/org-header.ejs') %> 
+
+<div class="container mt-4 p-2">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="/images/chevron-logo.jpg" alt="Chevron Logo" class="img-fluid">
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-7 mt-4">
+            <h3><span class="text-capitalize"><%= scholarship.name %></span>  Applications</h3>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+
+    <p class="text-center lead mb-3 mt-4 p-3 text-dark">
+        There are <span class="badge badge-dark"><%= applications.length %> </span> applications so far for this scholarship.
+    </p>
+
+    <div class="row">
+        <% applications.forEach((application,index) => { %>
+            <div class="col-sm-12 mt-2 border-top p-2">
+                <h3 class="float-left mr-3 mt-2"><%= index + 1 %> </h3>
+                <span class="fullname float-left"><%= application.fullName %></span>
+                <a href="#" data-toggle="modal" data-target="#modal<%= application.id %> " class="btn btn-primary float-right mt-2">View</a><br>
+                <span class="school small float-left mt-2 text-dark"><strong>UNIVERSITY OF IBADAN</strong></span>
+            </div>
+            <hr>
+
+            <div class="modal fade" id="modal<%= application.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-center" id="exampleModalLabel">Applicant Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="list-group-flush">
+                                <li class="list-group-item"><span class="tag small">NAME</span><%= application.fullName %> </li>
+                                <li class="list-group-item"><span class="tag small">CGPA</span> <%= application.cgpa %> </li>
+                                <li class="list-group-item"><span class="tag small">LEVEL</span> <%= application.level %> </li>
+                                <li class="list-group-item"><span class="tag small">STATE</span> <%= application.state %> </li>
+                                <li class="list-group-item"><span class="tag small">LGA</span> <%= application.lga %> </li>
+                                <li class="list-group-item"><span class="tag small">UNIVERSITY</span> UNIVERSITY OF IBADAN </li>
+                                <li class="list-group-item"><span class="tag small">ACCOUNT DETAILS</span> 0219209120 (GT Bank)</li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <% }) %>
+    </div>
+</div>
+
+
+
+
+<%- include ('../partials/footer.ejs') %> 
