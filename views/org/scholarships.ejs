@@ -1,6 +1,44 @@
-<%- include ('./partials/org-header.ejs') %> 
+<%- include ('../partials/org-header.ejs') %> 
 
-  <h1><%= title %></h1>
-  <p>Welcome to <%= title %></p>
+<div class="container mt-4 p-2">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="/images/chevron-logo.jpg" alt="Chevron Logo" class="img-fluid">
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-7 mt-4">
+            <h3>ALL SCHOLARSHIPS</h3>
+        </div>
+    </div>
+</div>
 
-<%- include ('./partials/footer.ejs') %> 
+<table class="table table-bordered table-md">
+
+    <thead>
+        <tr>
+            <th>S/N</th>
+            <th>Title</th>
+            <th>Deadline</th>
+            <th>-</th>
+            <th>-</th>
+            <th>-</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% scholarships.forEach((scholarship,index) => { %>
+            <tr>
+                <th><%= index+1 %> </th>
+                <th><%= scholarship.name %> </th>
+                <th><%= scholarship.deadline.toDateString() %> </th>
+                <th><a href="/org/scholarships/<%= scholarship.id %>/applications">See all applications</a></th>
+                <th><a href="/org/scholarships/<%= scholarship.id %> ">View</a></th>
+                <th><a href="/org/scholarships/<%= scholarship.id %>/edit">Edit</a></th>
+            </tr>
+        <% }) %>
+    </tbody>
+
+
+</table>
+
+<%- include ('../partials/footer.ejs') %> 

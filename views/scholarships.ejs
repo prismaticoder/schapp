@@ -11,7 +11,8 @@
 <div class="col-lg-9 mx-auto mt-lg-0 mt-3" id="jobTable">
 
 <!-- </div> -->
-      <% scholarships.forEach(scholarship => { %>
+<% if (scholarships.length > 0) { %>
+    <% scholarships.forEach(scholarship => { %>
         <div class="mb-4 border rounded">
             <div class="row p-3">
                 <div class="col-md-2">
@@ -21,6 +22,7 @@
                     <a class="text-dark" href="/scholarships/<%= scholarship.id %>">
                         <h4 class="b-6 mt-3 mt-lg-0 ci-title"><%= scholarship.name %> </h4>
                     </a>
+                    <p class="mt-4 small">Deadline: <%= scholarship.deadline.toDateString() %> </p>
                 </div>
                 <div class="col-md-3">
                     <a href="/scholarships/<%= scholarship.id %>" class="btn mt-2 br-0 btn-primary unsub_cancel btn-sm rounded">View
@@ -29,6 +31,14 @@
             </div>
         </div>
       <% }) %>
+<% }  else { %>
+    <div class="mx-auto">
+        <p class="text-center">
+            There are currently no new scholarships available on the platform.
+        </p>
+    </div>
+<% } %>
+      
   </div>
 
 

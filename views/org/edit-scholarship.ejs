@@ -1,0 +1,130 @@
+<%- include ('../partials/org-header.ejs') %> 
+
+
+<div class="container mt-4 p-2">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="/images/chevron-logo.jpg" alt="Chevron Logo" class="img-fluid">
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-7 mt-4">
+            <h3>EDIT SCHOLARSHIP</h3>
+        </div>
+    </div>
+</div>
+<hr>
+<form action="/org/scholarships" class="p-2 mt-5" method="post">
+    <div class="form-group">
+        <h4 class="text-center">TITLE</h4>
+        <label for="name">Title of Scholarship</label>
+        <input required class="form-control" type="text" name="name" id="name" value="<%= scholarship.name %> " placeholder="Enter the Title here...">
+    </div>
+    <hr>
+    <h4 class="text-center">REQUIREMENTS</h4>
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <label for="cgpa">Minimum CGPA Required (5.0 Scale)</label>
+            <select required class="form-control" name="cgpa" id="cgpa">
+                <option value="Any">None Required</option>
+                <% for( let i = 2; i < 5.5; i+=0.5 ) { %>
+                    <% if (i == parseInt(JSON.parse(scholarship.restrictions).cgpa)) { %>
+                        <option selected value="<%= i %>.0"><%= i %>.0</option>
+                    <% } else { %>
+                        <option value="<%= i %>.0"><%= i %>.0</option>
+                    <% } %>
+                <% } %>
+            </select>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+        <div class="form-group col-md-5">
+            <label for="level">Minimum Level Required</label>
+            <select required class="form-control" name="level" id="level">
+                <option value="Any">All Levels</option>
+                <option value="100">Freshmen (100L) only</option>
+                <option value="200">200L and above</option>
+                <!-- <option value="400">400</option> -->
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="state">Which state of the federation is this scholarship applicable to?</label>
+            <select required class="form-control actualState" name="state" id="state">
+                <option class="anyState" value="Any">All</option>
+                <% states.forEach(state => { %>
+                    <option value="<%= state.state.title %>"><%= state.state.title %></option>
+                <% }) %>
+            </select>
+        </div>
+        <div class="col-md-1">
+
+        </div>
+        <div class="form-group lgas col-md-5 d-none">
+            <label for="level">Local Government Area</label>
+            <select class="form-control" name="lga" id="lga">
+                <option value="Any">All</option>
+            </select>
+        </div>
+    </div>
+    <hr>
+    <h4 class="text-center">DESCRIPTION</h4>
+    <div class="form-group">
+        <label for="deadline">Deadline</label>
+        <input class="form-control col-md-5" type="text" id="deadline" name="deadline" value="<%= scholarship.deadline.toDateString() %>" placeholder="Click to set deadline...">
+    </div>
+    <div class="form-group">
+        <label for="details">Full Details</label>
+        <textarea required name="details" id="details" cols="30" rows="10" class="form-control" placeholder="Enter Scholarship Description here..."><%= scholarship.details %></textarea>
+    </div>
+    <hr>
+    <button class="btn btn-block mt-2 myBtn col-md-4 col-sm-10 text-white btn-primary" type="submit" style="margin: auto;">Add Scholarship</button>
+    
+</form>
+
+<script
+  src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+  integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+  crossorigin="anonymous"></script>
+
+<script>
+    $(function() {
+
+        $('#deadline').datepicker({
+        dateFormat: "yy-mm-dd"
+    })
+
+
+
+        $('.actualState').change(function() {
+        let value = this.value;
+
+        if (value == "Any") {
+            $('.lgas').addClass('d-none')
+        }
+
+        else {
+            $.ajax({
+            url: `/org/states/${value}/locals`,
+            method: 'GET',
+            success: function(data) {
+                $('#lga').html("");
+                $('#lga').append(`<option value="Any">All</option>`)
+                data.forEach(element => {
+                    $('#lga').append(`<option value="${element.title}">${element.title}</option>`)
+                })
+                $('.lgas').removeClass('d-none')
+                $('.lgas').css('display','block')
+            },
+            error: function(err) {
+                console.error(err)
+            }
+        })
+        }
+    })
+    })
+    
+</script>
+
+<%- include ('../partials/footer.ejs') %> 
