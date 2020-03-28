@@ -21,6 +21,9 @@ module.exports = {
       restrictions: {
         type: Sequelize.STRING
       },
+      imageLogo: {
+        type: Sequelize.STRING
+      },
       details: {
         type: Sequelize.TEXT('long')
       },

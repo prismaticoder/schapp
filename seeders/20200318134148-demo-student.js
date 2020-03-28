@@ -1,7 +1,7 @@
 'use strict';
 
 var faker = require('faker');
-var states = require('../public/states-and-locals')
+var states = require('../routes/states-and-locals')
 
 
 module.exports = {

@@ -48,12 +48,33 @@ router.get('/scholarships', checkOrg, async (req, res) => {
     let { org } = res.locals;
 
     let scholarships = await org.getScholarships();
-    return res.render('org/scholarships', {title: `${org.name} Scholarships`, org, scholarships})
+    return res.render('org/scholarships', {title: `${org.name} Scholarships`, page_name: "scholarships", org, scholarships})
 })
 
+router.get('/scholarships/:id/edit', checkOrg, async (req, res) => {
+    let { org } = res.locals;
+    let { id } = req.params;
+
+    let scholarship = await Scholarship.findByPk(id);
+
+    return res.render('org/edit-scholarship', {title: `Edit ${scholarship.name}`, page_name: "scholarships", org, scholarship, states})
+})
+
+
+router.get('/scholarships/:id/applications', checkOrg, async (req, res) => {
+    let { org } = res.locals;
+    let { id } = req.params;
+
+    let scholarship = await Scholarship.findByPk(id);
+
+    let applications = await scholarship.getStudents()
+
+    return res.render('org/application', {title: `${scholarship.name} Applications`, page_name: "scholarships", org, scholarship, applications})
+})
+
+
 router.get('/scholarships/new', checkOrg, async (req, res) => {
-    console.log(states)
-    return res.render('org/add-scholarship', {title: "Add New Scholarship", page_name: "scholarship", states})
+    return res.render('org/add-scholarship', {title: "Add New Scholarship", page_name: "new-scholarship", states})
 })
 
 router.get('/states/:state/locals', checkOrg, async (req, res) => {
@@ -61,11 +82,7 @@ router.get('/states/:state/locals', checkOrg, async (req, res) => {
 
     let [ stateObj ] = states.filter(element => element.state.title == state);
 
-    console.log(stateObj)
-
     let { locals }= stateObj.state;
-
-    console.log(locals)
 
     return res.json(locals)
 })

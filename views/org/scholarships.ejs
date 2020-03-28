@@ -12,6 +12,8 @@
     </div>
 </div>
 
+<hr>
+
 <table class="table table-bordered table-md">
 
     <thead>
@@ -28,12 +30,12 @@
     <tbody>
         <% scholarships.forEach((scholarship,index) => { %>
             <tr>
-                <th><%= index+1 %> </th>
-                <th><%= scholarship.name %> </th>
-                <th><%= scholarship.deadline.toDateString() %> </th>
-                <th><a href="/org/scholarships/<%= scholarship.id %>/applications">See all applications</a></th>
-                <th><a href="/org/scholarships/<%= scholarship.id %> ">View</a></th>
-                <th><a href="/org/scholarships/<%= scholarship.id %>/edit">Edit</a></th>
+                <td><%= index+1 %> </td>
+                <td><%= scholarship.name %> </td>
+                <td><%= scholarship.deadline.toDateString() %> </td>
+                <td><a href="/org/scholarships/<%= scholarship.id %>/applications">See all applications</a></td>
+                <td><a href="/org/scholarships/<%= scholarship.id %> ">View</a></td>
+                <td><a href="/org/scholarships/<%= scholarship.id %>/edit">Edit</a></td>
             </tr>
         <% }) %>
     </tbody>
