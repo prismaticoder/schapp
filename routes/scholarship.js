@@ -57,7 +57,7 @@ router.get('/:id', async (req,res) => {
             else {
                 student = null
             }
-            return res.render('single-scholarship', {title: `${scholarship.name} Scholarship`, page_name: "scholarships", scholarship, student})
+            return res.render('single-scholarship', {title: `${scholarship.name} Scholarship`, page_name: "single-scholarship", scholarship, student})
         }
         else {
             return res.status(404).json("Invalid ID")
