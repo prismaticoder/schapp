@@ -1,57 +1,145 @@
 <%- include ('./partials/student-header.ejs') %> 
 
-<h3 class="text-center mt-5">STUDENT PROFILE</h3>
+<h3 class="text-center mt-5">MY PROFILE</h3>
 <hr>
 
 <div class="container">
-    <div class="row border-bottom p-3">
-        <div class="col-md-4">
-            Name: <%= student.fullName %> 
+    <p class="small text-center">
+        <em><strong>Note: If any of these details are incorrect or outdated, you are to file a compliant to your school's information service division where it will be properly updated as seen fit.</strong></em>
+    </p>
+    <div class="row  p-3">
+        <div class="col-md-3 mt-3">
+            <span class="tag text-uppercase">Name</span>
+            <%= student.fullName %> 
         </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-3">
-            Matric. Number: <%= student.matric %> 
+        <div class="col-md-1 mt-3"></div>
+        <div class="col-md-3 mt-3">
+            <span class="tag text-uppercase">Matric Number</span>
+            <%= student.matric %> 
         </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-3">
-            Level: <%= student.level %> 
-        </div>
-    </div>
-    <div class="row border-bottom p-3">
-        <div class="col-md-3">
-            Email: <%= student.email %> 
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-3">
-            CGPA: <%= student.cgpa %> 
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-4">
-            Session of Admission: <%= student.admissionYear %> 
+        <div class="col-md-1 mt-3"></div>
+        <div class="col-md-3 mt-3">
+            <span class="tag text-uppercase">Level</span>
+            <%= student.level %> 
         </div>
     </div>
-    <div class="row border-bottom p-3">
-        <div class="col-md-5">
-            Faculty: <%= student.faculty %> 
+    <div class="row  p-3">
+        <div class="col-md-3 mt-3">
+            <span class="tag text-uppercase">Email</span>
+            <%= student.email %> 
         </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-5">
-            Department: <%= student.department %> 
+        <div class="col-md-1 mt-3"></div>
+        <div class="col-md-3 mt-3">
+            <span class="tag text-uppercase">Phone Number</span>
+            <%= student.phoneNumber %> 
+        </div>
+        <div class="col-md-1 mt-3"></div>
+        <div class="col-md-4 mt-3">
+            <span class="tag text-uppercase">Session Of Admission</span>
+            <%= student.admissionYear %> 
         </div>
     </div>
-    <div class="row border-bottom p-3">
-        <div class="col-md-3">
-            Nationality: <%= student.nationality %> 
+    <div class="row  p-3">
+        <div class="col-md-3 mt-3">
+            <span class="tag text-uppercase">CGPA</span>
+            <%= student.cgpa %> 
         </div>
         <div class="col-md-1"></div>
-        <div class="col-md-3">
-            State: <%= student.state %> 
+        <div class="col-md-3 mt-3">
+            <span class="tag text-uppercase">Faculty</span>
+            <%= student.faculty %> 
         </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-4">
-            LGA: <%= student.lga %> 
+        <div class="col-md-1 mt-3"></div>
+        <div class="col-md-3 mt-3">
+            <span class="tag text-uppercase">Department</span>
+            <%= student.department %> 
+        </div>
+    </div>
+    <div class="row  p-3">
+        <div class="col-md-3 mt-3">
+            <span class="tag text-uppercase">Nationality</span>
+            <%= student.nationality %> 
+        </div>
+        <div class="col-md-1 mt-3"></div>
+        <div class="col-md-3 mt-3">
+            <span class="tag text-uppercase">State</span>
+            <%= student.state %> 
+        </div>
+        <div class="col-md-1 mt-3"></div>
+        <div class="col-md-4 mt-3">
+            <span class="tag text-uppercase">LGA</span>
+            <%= student.lga %> 
+        </div>
+    </div>
+    <div class="row p-3">
+        <div class="col-md-4 mt-3">
+            <% if (!student.nuban || !student.bank) { %>
+                <span class="tag text-uppercase">Account Details (<a href="#" data-toggle="modal" data-target="#modal<%= student.id %>">Add</a>)</span>
+            <% } else { %>
+                <span class="tag text-uppercase">Account Details (<a href="#" data-toggle="modal" data-target="#modal<%= student.id %>">Edit</a>)</span>
+                <%= student.nuban %> (<%= student.bank %>)
+            <% } %>   
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modal<%= student.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">Add/Modify Account Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" class="account-form">
+                    <div class="form-group">
+                        <label for="nuban">Account Number (NUBAN)</label>
+                        <input type="text" pattern="\d*" title="Only numbers are allowed in this field" minlength="10" maxlength="10" required name="nuban" value="<%= student.nuban %>" id="nuban" placeholder="Enter Account Number here..." class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="bank">Bank</label>
+                        <input type="text" required value="<%= student.bank %>" name="bank" id="bank" placeholder="Bank Name..." class="form-control">
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $('.account-form').submit(function(e) {
+        e.preventDefault();
+
+        let nuban = $('#nuban').val(), bank = $('#bank').val()
+        let id = `<%= student.id %>`
+
+        $.ajax({
+            url: `/profile/modifyAccount/${id}`,
+            method: 'POST',
+            data: {
+                nuban, bank
+            },
+            success: function(res) {
+                alert(res.message);
+                window.location.reload(true)
+            },
+            error: function(err) {
+                console.error(err)
+            }
+        })
+    })
+
+
+</script>
+
 
 <%- include ('./partials/footer.ejs') %> 

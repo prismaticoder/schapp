@@ -60,6 +60,12 @@ module.exports = {
       otherName: {
         type: Sequelize.STRING
       },
+      nuban: {
+        type: Sequelize.STRING
+      },
+      bank: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

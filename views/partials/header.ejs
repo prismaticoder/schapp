@@ -3,6 +3,17 @@
   <head>
     <title>schAppp | <%= title %></title>
     <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+
+    <% if (page_name == 'single-scholarship') { %>
+      <meta property="og:title" content="schAppp | <%= title %>" />
+      <meta property="og:image" content="/images/<%= scholarship.imageLogo %> " />
+      <meta property="og:description" content="Apply for the <%= scholarship.name %> title scholarship today with schAppp!" />
+    <% } else { %>
+      <meta property="og:title" content="schAppp | <%= title %>" />
+      <meta property="og:image" content="/images/schapp-logo.png " />
+      <meta property="og:description" content="Welcome to schAppp! Your one-stop university scholarship platform!" />
+    <% } %>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
       <!-- Custom styles for this template -->
     <link href="/stylesheets/landing-page.min.css" rel="stylesheet">
@@ -22,6 +33,15 @@
     <!-- <link href="https://fonts.googleapis.com/css?family=Abel|Roboto|Ubuntu&display=swap" rel="stylesheet"> -->
      <!-- Custom styles for this template -->
      <link href="/stylesheets/sticky-footer.css" rel="stylesheet">
+
+
+     <style>
+      .tag {
+        font-weight: 600;
+        display: block;
+        font-size: 14px;
+      }
+   </style>
   </head>
   <body>
 

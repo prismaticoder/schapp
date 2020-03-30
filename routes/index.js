@@ -61,6 +61,24 @@ router.get('/logout', checkStudent, (req, res)=> {
   res.redirect('/')
 })
 
+router.post('/profile/modifyAccount/:id', checkStudent, async (req, res) => {
+  let { nuban, bank } = req.body;
+  let { id } = req.params;
+
+  try {
+    let student = await Student.findByPk(id)
+
+    student.nuban = nuban;
+    student.bank = bank
+
+    await student.save()
+
+    return res.json({message: "Account Details modified successfully!"})
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 router.get('/notifications', checkStudent, async (req, res) => {
   let { student } = res.locals;
 

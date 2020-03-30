@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     dob: DataTypes.STRING,
     hasLoggedIn: DataTypes.BOOLEAN,
     otherName: DataTypes.STRING,
+    nuban: DataTypes.STRING,
+    bank: DataTypes.STRING,
     fullName: {
       type: DataTypes.VIRTUAL,
       get() {
