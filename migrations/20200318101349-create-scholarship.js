@@ -13,7 +13,7 @@ module.exports = {
       },
       orgId: {
         type: Sequelize.INTEGER,
-        references: { model: 'orgs', key: 'id' }
+        references: { model: 'Orgs', key: 'id' }
       },
       deadline: {
         type: Sequelize.DATE

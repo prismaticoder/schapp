@@ -10,11 +10,11 @@ module.exports = {
       },
       scholarshipId: {
         type: Sequelize.INTEGER,
-        references: { model: 'scholarships', key: 'id' }
+        references: { model: 'Scholarships', key: 'id' }
       },
       studentId: {
         type: Sequelize.INTEGER,
-        references: { model: 'students', key: 'id' }
+        references: { model: 'Students', key: 'id' }
       },
       status: {
         type: Sequelize.ENUM(['ongoing','accepted','rejected'])
