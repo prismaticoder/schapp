@@ -13,7 +13,7 @@
     </div>
 </div>
 <hr>
-<form action="/org/scholarships" class="p-2 mt-5" method="post">
+<form id="scholarForm" action="/org/scholarships" class="p-2 mt-5" method="post">
     <div class="form-group">
         <h4 class="text-center">TITLE</h4>
         <label for="name">Title of Scholarship</label>
@@ -72,11 +72,11 @@
     <h4 class="text-center">DESCRIPTION</h4>
     <div class="form-group">
         <label for="deadline">Deadline</label>
-        <input class="form-control col-md-5" type="text" id="deadline" name="deadline" placeholder="Click to set deadline...">
+        <input required class="form-control col-md-5" type="text" id="deadline" name="deadline" placeholder="Click to set deadline...">
     </div>
     <div class="form-group">
         <label for="details">Full Details</label>
-        <textarea required name="details" id="details cols="30" rows="10" class="form-control" placeholder="Enter Scholarship Description here..."></textarea>
+        <textarea required name="details" id="details" cols="30" rows="10" class="form-control" placeholder="Enter Scholarship Description here..."></textarea>
     </div>
     <hr>
     <button class="btn btn-block mt-2 myBtn col-md-4 col-sm-10 text-white btn-primary" type="submit" style="margin: auto;">Add Scholarship</button>
@@ -93,7 +93,34 @@
 
         $('#deadline').datepicker({
         dateFormat: "yy-mm-dd"
-    })
+        })
+
+        $('#scholarForm').submit(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/org/scholarships',
+                method: 'POST',
+                data: {
+                    name: $('#name').val(),
+                    cgpa:  $('#cgpa').val(),
+                    level:  $('#level').val(),
+                    state:  $('#state').val(),
+                    lga:  $('#lga').val() || "Any",
+                    deadline:  $('#deadline').val(),
+                    details:  $('#details').val(),
+                },
+                success: function (res) {
+                    alert(res.message);
+                    window.location.href = '/org/scholarships'
+                },
+                error: function(err) {
+                    console.error(err)
+                }
+            })
+
+        })
+
 
 
 

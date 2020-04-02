@@ -98,7 +98,7 @@ router.get('/scholarships/:id', checkOrg, async (req, res) => {
     })
 
     let students = await scholarship.getStudents();
-    return res.render('org/single-scholarship', {title: `${org.name} Scholarships | ${scholarship.name} Scholarship`, org, scholarship, students})
+    return res.render('org/single-scholarship', {title: `${org.name} Scholarships | ${scholarship.name} Scholarship`, page_name: "single-scholarship", org, scholarship, students})
 })
 
 router.post('/scholarships', checkOrg, async (req, res) => {
@@ -115,7 +115,7 @@ router.post('/scholarships', checkOrg, async (req, res) => {
         })
         
         if (scholarship) {
-            return res.status(200).json({message: "Scholarship Added Successfully", scholarship})
+            return res.json({message: "New scholarship created successfully!"})
         }
     } catch (error) {
         console.log(error)
@@ -125,20 +125,20 @@ router.post('/scholarships', checkOrg, async (req, res) => {
 router.put('/scholarships/:id', checkOrg, async (req, res) => {
     let { org } = res.locals;
     let { id } = req.params;
-    let { name, details, deadline, restrictions } = req.body;
+    let { name, details, deadline, cgpa, level, state, lga } = req.body;
 
     try {
-        let scholarship = await scholarship.findOne({
+        let scholarship = await Scholarship.findOne({
             where: {
                 id
             }
         })
     
-        scholarship.name = name; scholarship.details = details; scholarship.deadline = deadline; scholarship.restrictions = JSON.stringify(restrictions);
+        scholarship.name = name; scholarship.details = details; scholarship.deadline = deadline; scholarship.restrictions = JSON.stringify({cgpa,level,state,lga});
     
         await scholarship.save()
         
-        return res.status(200).json({message: "Scholarship Updated Successfully", scholarship})
+        return res.json({message: "Scholarship updated successfully!", scholarship})
     } catch (error) {
         console.log(error)
     }
