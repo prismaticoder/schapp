@@ -13,11 +13,12 @@
     </div>
 </div>
 <hr>
-<form action="/org/scholarships" class="p-2 mt-5" method="post">
+<form class="p-2 mt-5" id="scholarForm">
     <div class="form-group">
         <h4 class="text-center">TITLE</h4>
         <label for="name">Title of Scholarship</label>
         <input required class="form-control" type="text" name="name" id="name" value="<%= scholarship.name %> " placeholder="Enter the Title here...">
+        <input type="hidden" id="id" name="id" value="<%= scholarship.id %> ">
     </div>
     <hr>
     <h4 class="text-center">REQUIREMENTS</h4>
@@ -42,7 +43,7 @@
             <label for="level">Minimum Level Required</label>
             <select required class="form-control" name="level" id="level">
                 <option value="Any">All Levels</option>
-                <option value="100">Freshmen (100L) only</option>
+                <option  value="100">Freshmen (100L) only</option>
                 <option value="200">200L and above</option>
                 <!-- <option value="400">400</option> -->
             </select>
@@ -54,17 +55,22 @@
             <select required class="form-control actualState" name="state" id="state">
                 <option class="anyState" value="Any">All</option>
                 <% states.forEach(state => { %>
+                    <% if (state.state.title == JSON.parse(scholarship.restrictions).state) { %>
+                        <option selected value="<%= state.state.title %>"><%= state.state.title %></option>
+                    <% } else { %>
                     <option value="<%= state.state.title %>"><%= state.state.title %></option>
+                    <% } %>
                 <% }) %>
             </select>
         </div>
         <div class="col-md-1">
 
         </div>
-        <div class="form-group lgas col-md-5 d-none">
+        <div class="form-group lgas col-md-5 <%= (JSON.parse(scholarship.restrictions).state == "Any") ? "d-none" : ""  %>">
             <label for="level">Local Government Area</label>
             <select class="form-control" name="lga" id="lga">
-                <option value="Any">All</option>
+                <!-- <option value="Any">All</option> -->
+                <option value="<%= JSON.parse(scholarship.restrictions).lga  %>"></option>
             </select>
         </div>
     </div>
@@ -79,7 +85,7 @@
         <textarea required name="details" id="details" cols="30" rows="10" class="form-control" placeholder="Enter Scholarship Description here..."><%= scholarship.details %></textarea>
     </div>
     <hr>
-    <button class="btn btn-block mt-2 myBtn col-md-4 col-sm-10 text-white btn-primary" type="submit" style="margin: auto;">Add Scholarship</button>
+    <button class="btn btn-block mt-2 myBtn col-md-4 col-sm-10 text-white btn-primary" type="submit" style="margin: auto;">Update</button>
     
 </form>
 
@@ -93,7 +99,34 @@
 
         $('#deadline').datepicker({
         dateFormat: "yy-mm-dd"
-    })
+        })
+
+
+        $('#scholarForm').submit(function(e) {
+            e.preventDefault();
+            let id = $('#id').val()
+            $.ajax({
+                url: `/org/scholarships/${id}`,
+                method: 'PUT',
+                data: {
+                    name: $('#name').val(),
+                    cgpa:  $('#cgpa').val(),
+                    level:  $('#level').val(),
+                    state:  $('#state').val(),
+                    lga:  $('#lga').val() || "Any",
+                    deadline:  $('#deadline').val(),
+                    details:  $('#details').val(),
+                },
+                success: function (res) {
+                    alert(res.message);
+                    window.location.href = '/org/scholarships'
+                },
+                error: function(err) {
+                    console.error(err)
+                }
+            })
+
+        })
 
 
 
@@ -109,8 +142,8 @@
             url: `/org/states/${value}/locals`,
             method: 'GET',
             success: function(data) {
-                $('#lga').html("");
-                $('#lga').append(`<option value="Any">All</option>`)
+                // $('#lga').html("");
+                // $('#lga').append(`<option value="Any">All</option>`)
                 data.forEach(element => {
                     $('#lga').append(`<option value="${element.title}">${element.title}</option>`)
                 })
