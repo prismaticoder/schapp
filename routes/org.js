@@ -57,7 +57,7 @@ router.get('/scholarships/:id/edit', checkOrg, async (req, res) => {
 
     let scholarship = await Scholarship.findByPk(id);
 
-    return res.render('org/edit-scholarship', {title: `Edit ${scholarship.name}`, page_name: "scholarships", org, scholarship, states})
+    return res.render('org/edit-scholarship', {title: `Edit ${scholarship.name}`, page_name: "single-scholarship",type: "edit scholarship", org, scholarship, states})
 })
 
 
@@ -69,12 +69,12 @@ router.get('/scholarships/:id/applications', checkOrg, async (req, res) => {
 
     let applications = await scholarship.getStudents()
 
-    return res.render('org/application', {title: `${scholarship.name} Applications`, page_name: "scholarships", org, scholarship, applications})
+    return res.render('org/application', {title: `${scholarship.name} Applications`, page_name: "single-scholarship", type: "applications", org, scholarship, applications})
 })
 
 
 router.get('/scholarships/new', checkOrg, async (req, res) => {
-    return res.render('org/add-scholarship', {title: "Add New Scholarship", page_name: "new-scholarship", states})
+    return res.render('org/add-scholarship', {title: "Add New Scholarship", page_name: "new-scholarship", type: "add", states})
 })
 
 router.get('/states/:state/locals', checkOrg, async (req, res) => {

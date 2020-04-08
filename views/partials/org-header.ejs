@@ -28,6 +28,20 @@
           font-weight: bold;
           display: block;
         }
+
+        .breadcrumb-2 {
+          font-size: 1.4em;
+          color: grey !important;
+        }
+        .breadcrumb-2 a {
+          color: inherit;
+        }
+        .breadcrumb-2 a:hover {
+          color: black;
+        }
+        .breadcrumb-2>.active-one {
+          color: black;
+        }
      </style>
   </head>
   <body>
@@ -50,7 +64,7 @@
               <li class="nav-item <%= (page_name == 'scholarships')?"active":"" %>">
                 <a class="nav-link" href="/org/scholarships">Scholarships</a>
               </li>
-              <li class="nav-item <%= (page_name == 'new-scholarships')?"active":"" %>">
+              <li class="nav-item <%= (page_name == 'new-scholarship')?"active":"" %>">
                   <a class="nav-link" href="/org/scholarships/new">Add New Scholarship</a>
               </li>
               <li class="nav-item <%= (page_name == 'logout')?"active":"" %>">
@@ -62,5 +76,11 @@
           </form>
         </div>
       </nav>
+
+      <% if (page_name == "single-scholarship") { %>
+        <div class="container-fluid breadcrumb-2 border-bottom p-3">
+          <span><a href="/org"><%= org.name.toUpperCase() %> </a></span> <i class="fa fa-angle-right">|</i> <span><a href="/org/scholarships">SCHOLARSHIPS</a></span> <i class="fa fa-angle-right">|</i> <span class="active-one"><%= type.toUpperCase() %> </span>
+        </div>
+      <% } %>
     
     <div class="container p-2">
