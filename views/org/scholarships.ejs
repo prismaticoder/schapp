@@ -1,46 +1,18 @@
 <%- include ('../partials/org-header.ejs') %> 
 
-<div class="container mt-4 p-2">
+
+<div class="mt-4">
     <div class="row">
-        <div class="col-md-4">
-            <img src="/images/chevron-logo.jpg" alt="Chevron Logo" class="img-fluid">
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-7 mt-4">
-            <h3>ALL SCHOLARSHIPS</h3>
-        </div>
+        <% scholarships.forEach((scholarship,index) => { %>
+                <div class="col-sm-12 mt-4 border p-3">
+                    <h3 class="float-left mr-3 mt-2"><%= index + 1 %> </h3>
+                    <span class="fullname float-left text-capitalize"><%= scholarship.name %></span><br>
+                    <span class="school small float-left mt-1 text-dark"><strong>DEADLINE DATE: <%= scholarship.deadline %> </strong></span>
+                    <a href="/org/scholarships/<%= scholarship.id %>/applications" class="btn btn-primary float-right mt-1">Check applications</a>
+                </div>
+            
+        <% }) %>
     </div>
 </div>
-
-<hr>
-
-<table class="table table-bordered table-md">
-
-    <thead>
-        <tr>
-            <th>S/N</th>
-            <th>Title</th>
-            <th>Deadline</th>
-            <th>-</th>
-            <th>-</th>
-            <th>-</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <% scholarships.forEach((scholarship,index) => { %>
-            <tr>
-                <td><%= index+1 %> </td>
-                <td><%= scholarship.name %> </td>
-                <td><%= scholarship.deadline.toDateString() %> </td>
-                <td><a href="/org/scholarships/<%= scholarship.id %>/applications">See all applications</a></td>
-                <td><a href="/org/scholarships/<%= scholarship.id %> ">View</a></td>
-                <td><a href="/org/scholarships/<%= scholarship.id %>/edit">Edit</a></td>
-            </tr>
-        <% }) %>
-    </tbody>
-
-
-</table>
 
 <%- include ('../partials/footer.ejs') %> 

@@ -23,7 +23,7 @@
         <% applications.forEach((application,index) => { %>
             <div class="col-sm-12 mt-2 border-top p-2">
                 <h3 class="float-left mr-3 mt-2"><%= index + 1 %> </h3>
-                <span class="fullname float-left"><%= application.fullName %></span>
+                <span class="fullname text-capitalize float-left"><%= application.fullName %></span>
                 <a href="#" data-toggle="modal" data-target="#modal<%= application.id %> " class="btn btn-primary float-right mt-2">View</a><br>
                 <span class="school small float-left mt-2 text-dark"><strong>UNIVERSITY OF IBADAN</strong></span>
             </div>
@@ -46,7 +46,7 @@
                                 <li class="list-group-item"><span class="tag small">STATE</span> <%= application.state %> </li>
                                 <li class="list-group-item"><span class="tag small">LGA</span> <%= application.lga %> </li>
                                 <li class="list-group-item"><span class="tag small">UNIVERSITY</span> UNIVERSITY OF IBADAN </li>
-                                <li class="list-group-item"><span class="tag small">ACCOUNT DETAILS</span> <%= student.nuban %> (<%= student.bank %>)</li>
+                                <li class="list-group-item"><span class="tag small">ACCOUNT DETAILS</span> <%= application.nuban %> (<%= application.bank %>)</li>
                             </ul>
                         </div>
                         <div class="modal-footer">

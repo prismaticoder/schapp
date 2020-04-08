@@ -1,18 +1,7 @@
 <%- include ('../partials/org-header.ejs') %> 
 
 
-<div class="container mt-4 p-2">
-    <div class="row">
-        <div class="col-md-4">
-            <img src="/images/chevron-logo.jpg" alt="Chevron Logo" class="img-fluid">
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-7 mt-4">
-            <h3>EDIT SCHOLARSHIP</h3>
-        </div>
-    </div>
-</div>
-<hr>
+
 <form class="p-2 mt-5" id="scholarForm">
     <div class="form-group">
         <h4 class="text-center">TITLE</h4>
@@ -70,7 +59,7 @@
             <label for="level">Local Government Area</label>
             <select class="form-control" name="lga" id="lga">
                 <!-- <option value="Any">All</option> -->
-                <option value="<%= JSON.parse(scholarship.restrictions).lga  %>"></option>
+                <option value="<%= JSON.parse(scholarship.restrictions).lga  %>"><%= JSON.parse(scholarship.restrictions).lga  %></option>
             </select>
         </div>
     </div>
@@ -131,31 +120,31 @@
 
 
         $('.actualState').change(function() {
-        let value = this.value;
+            let value = this.value;
 
-        if (value == "Any") {
-            $('.lgas').addClass('d-none')
-        }
+            if (value == "Any") {
+                $('.lgas').addClass('d-none')
+            }
 
-        else {
-            $.ajax({
-            url: `/org/states/${value}/locals`,
-            method: 'GET',
-            success: function(data) {
-                // $('#lga').html("");
-                // $('#lga').append(`<option value="Any">All</option>`)
-                data.forEach(element => {
-                    $('#lga').append(`<option value="${element.title}">${element.title}</option>`)
+            else {
+                $.ajax({
+                    url: `/org/states/${value}/locals`,
+                    method: 'GET',
+                    success: function(data) {
+                        $('#lga').html("");
+                        $('#lga').append(`<option value="Any">All</option>`)
+                        data.forEach(element => {
+                            $('#lga').append(`<option value="${element.title}">${element.title}</option>`)
+                        })
+                        $('.lgas').removeClass('d-none')
+                        $('.lgas').css('display','block')
+                    },
+                    error: function(err) {
+                        console.error(err)
+                    }
                 })
-                $('.lgas').removeClass('d-none')
-                $('.lgas').css('display','block')
-            },
-            error: function(err) {
-                console.error(err)
             }
         })
-        }
-    })
     })
     
 </script>
