@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
   }
   
   else {
-    return res.render('index', {title: "Welcome to schAppp", page_name: "home", student: null})
+    return res.render('index', {title: "Welcome to schApp", page_name: "home", student: null})
   }
   
 });
